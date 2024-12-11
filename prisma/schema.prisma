@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db" // Change to env("DATABASE_URL") for real db
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Use this for shadow database for real db
+}
+
+model Contact {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  first     String?
+  last      String?
+  avatar    String?
+  email     String?
+  github    String?
+  position  String?
+  favorite  Boolean   @default(false)
+  notes     String?
+  Message   Message[]
+}
+
+model User {
+  id      String    @id @default(uuid())
+  name    String
+  Message Message[]
+}
+
+model Message {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  contact     Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  contactId   String
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdById String
+  content     String
+}
