@@ -1,5 +1,10 @@
 import React from 'react';
+import ServerComponent from './_components/ServerComponent';
 
 export default function Page() {
-  return <div>Page</div>;
+  return (
+    <div>
+      <ServerComponent />
+    </div>
+  );
 }
