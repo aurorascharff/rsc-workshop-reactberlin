@@ -3,16 +3,15 @@ import Button from '@/components/ui/Button';
 import LinkButton from '@/components/ui/LinkButton';
 import { getContact } from '@/data/services/getContact';
 import GithubLogo from '@/public/github-mark.svg';
+import { routes } from '@/validations/routeSchema';
 import Favorite from './_components/Favorite';
 
 type PageProps = {
-  params: Promise<{
-    contactId: string;
-  }>;
+  params: Promise<unknown>;
 };
 
 export default async function ContactPage({ params }: PageProps) {
-  const contactId = (await params).contactId;
+  const { contactId } = routes.contactId.$parseParams(await params);
 
   const contact = await getContact(contactId);
 
