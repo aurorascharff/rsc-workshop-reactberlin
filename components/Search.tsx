@@ -1,7 +1,12 @@
+'use client';
+
+import { useSearchParams } from 'next/navigation';
 import React from 'react';
 import { SearchIcon, SpinnerIcon } from './ui/icons';
 
 export default function Search() {
+  const searchParams = useSearchParams();
+  const q = searchParams.get('q') || '';
   const searching = false;
 
   return (
@@ -10,6 +15,7 @@ export default function Search() {
         className="w-full pl-8 outline-offset-1"
         aria-label="Search contacts"
         name="q"
+        defaultValue={q}
         placeholder="Search"
         type="search"
       />
