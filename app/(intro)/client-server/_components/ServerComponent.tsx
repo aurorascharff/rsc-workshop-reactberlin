@@ -2,6 +2,7 @@ import React from 'react';
 import { prisma } from '@/db';
 
 export default async function ServerComponent() {
+  // Since we are on the server, we can access our db
   const data = await prisma.contact.findMany();
 
   return (
