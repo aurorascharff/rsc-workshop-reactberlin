@@ -5,8 +5,9 @@ import ServerComponent from './_components/ServerComponent';
 export default function Page() {
   return (
     <div>
-      <ServerComponent />
-      <ClientComponent />
+      <ClientComponent content={<ServerComponent />}>
+        <ServerComponent />
+      </ClientComponent>
     </div>
   );
 }
