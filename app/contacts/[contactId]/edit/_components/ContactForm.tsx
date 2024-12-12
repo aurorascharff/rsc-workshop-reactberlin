@@ -3,22 +3,10 @@ import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import LinkButton from '@/components/ui/LinkButton';
 import TextArea from '@/components/ui/TextArea';
-import type { Contact } from '@prisma/client';
+import { getContact } from '@/data/services/getContact';
 
-export default function ContactForm({ contactId }: { contactId: string }) {
-  const contact: Contact = {
-    avatar: '',
-    createdAt: new Date(),
-    email: '',
-    favorite: true,
-    first: 'John',
-    github: 'johndoe',
-    id: contactId,
-    last: 'Doe',
-    notes: 'This is a note.',
-    position: 'Software Engineer',
-    updatedAt: new Date(),
-  };
+export default async function ContactForm({ contactId }: { contactId: string }) {
+  const contact = await getContact(contactId);
 
   return (
     <form className="flex max-w-[40rem] flex-col gap-4 @container">
