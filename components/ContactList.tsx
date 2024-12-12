@@ -1,23 +1,10 @@
 import React from 'react';
-import ContactButton from './ContactButton';
-import type { Contact } from '@prisma/client';
 
-export default function ContactList() {
-  const contacts: Contact[] = [
-    {
-      avatar: '',
-      createdAt: new Date(),
-      email: '',
-      favorite: true,
-      first: 'John',
-      github: 'johndoe',
-      id: 'id',
-      last: 'Doe',
-      notes: 'This is a note.',
-      position: 'Software Engineer',
-      updatedAt: new Date(),
-    },
-  ];
+import { getContacts } from '@/data/services/getContacts';
+import ContactButton from './ContactButton';
+
+export default async function ContactList() {
+  const contacts = await getContacts();
 
   return (
     <nav className="flex-1 overflow-auto px-8 py-4">
